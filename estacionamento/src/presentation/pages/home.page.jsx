@@ -3,25 +3,40 @@ import React from "react";
 import { connect } from 'react-redux';
 
 import AboutPage from "./about.page"
+import { 
+    Button,
+    Container,
+    Col,
+    Row
+} from 'react-bootstrap';
 
 const HomePage = props => {
 
     const { min, max } = props;
 
     return (
-        <aside className="HomePage">
-            Home Page ss { min }
-            <button onClick={ () => {
-                console.log("btnNumeroMinimo");
-                props.alterarMinimo(min + 1) 
-                console.log(min);
-            }}>Add</button>
+        <>
+            <Container fluid>
+                <Row>
+                    <Col md={2}>1 of 1</Col>
+                    <Col md={5}>1 of 1</Col>
+                    <Col md={5}>1 of 1</Col>
+                </Row>
+            </Container>
+            <aside className="HomePage">
+                Home Page ss { min }
+                <button onClick={ () => {
+                    console.log("btnNumeroMinimo");
+                    props.alterarMinimo(min + 1) 
+                    console.log(min);
+                }}>Add</button>
 
-            <AboutPage />
-        </aside>
-    );
-    
-}
+                <AboutPage />
+
+            </aside>    
+            <Button>Show Toast</Button>
+        </>
+    )}
 
 function mapStateToProps(state) {
     return {

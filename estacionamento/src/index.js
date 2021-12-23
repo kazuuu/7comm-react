@@ -7,6 +7,8 @@ import './index.css';
 import { Provider } from 'react-redux';
 import storeConfig from './domain/store/store.config';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 const store = storeConfig();
 
 ReactDOM.render(
