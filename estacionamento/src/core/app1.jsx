@@ -9,7 +9,6 @@ export default function App() {
   return (
     <div className="App">
       <Router>
-        <MenuComponent />
         <ContentComponent />
       </Router>
     </div>
