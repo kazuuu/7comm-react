@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from 'core/App';
 import './index.css';
 
 import { Provider } from 'react-redux';
 import storeConfig from './domain/store/store.config';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import App from 'core/app';
 
 const store = storeConfig();
 

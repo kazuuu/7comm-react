@@ -1,4 +1,5 @@
-import { alterarNumeroMinimo } from "domain/store/actions/numeros.action";
+import { alterarNumeroMinimo } from "domain/store/auth/auth.action";
+import AppInputComponent from "presentation/components/app-input/app-input.component";
 import React from "react";
 import { connect } from 'react-redux';
 
@@ -9,6 +10,7 @@ const AboutPage = props => {
     return (
         <aside className="AboutPage">
             About Page ss { min }
+            <AppInputComponent></AppInputComponent>
         </aside>
     );
     

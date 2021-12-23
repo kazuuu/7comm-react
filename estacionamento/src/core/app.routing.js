@@ -1,10 +1,10 @@
-import AboutPage from "presentation/pages/about.page";
-import HomePage from "presentation/pages/home.page";
-import NotFoundPage from "presentation/pages/not-found.page.";
+import AboutPage from "presentation/pages/about/about.page";
+import HomePage from "presentation/pages/home/home.page";
+import NotFoundPage from "presentation/pages/not-found/not-found.page.";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
-const ContentComponent = props => (
+const AppRoutingContent = props => (
     <main className="ContentComponent">
         <Switch>
             <Route exact path="/">
@@ -20,4 +20,4 @@ const ContentComponent = props => (
     </main>
 );
 
-export default ContentComponent;
+export default AppRoutingContent;

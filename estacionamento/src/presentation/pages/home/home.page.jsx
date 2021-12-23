@@ -1,14 +1,15 @@
-import { alterarNumeroMinimo } from "domain/store/actions/numeros.action";
+import { alterarNumeroMinimo } from "domain/store/auth/auth.action";
 import React from "react";
 import { connect } from 'react-redux';
 
-import AboutPage from "./about.page"
+import AboutPage from "../about/about.page"
 import { 
     Button,
     Container,
     Col,
     Row
 } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 
 const HomePage = props => {
 
@@ -16,6 +17,8 @@ const HomePage = props => {
 
     return (
         <>
+                <Link to="/about">[About]</Link>
+
             <Container fluid>
                 <Row>
                     <Col md={2}>1 of 1</Col>

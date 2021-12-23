@@ -1,8 +1,8 @@
     import { createStore, combineReducers } from 'redux';
-    import numerosReducer from "domain/store/reducers/numeros.reducer";
+    import authReducer from "domain/store/auth/auth.reducer";
     
     const reducers = combineReducers({
-        numeros: numerosReducer,
+        authReducer: authReducer,
         nomes: function(state, action) {
             return [
                 'A',

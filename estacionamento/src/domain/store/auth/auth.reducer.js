@@ -1,13 +1,15 @@
-import { NUM_MIN_ALTERADO } from '../actions/actionTypes';
+import { LOGIN } from './auth.action';
 
 const initialSate = {
-    min: 1,
-    max: 10
+    currentUser: {
+        username: "admin",
+        email: "admin@teste.com"
+    },
 }
 
 export default function(state = initialSate, action) {
     switch(action.type) {
-        case NUM_MIN_ALTERADO: return {
+        case LOGIN: return {
             ...state,
             min: action.payload
         }
