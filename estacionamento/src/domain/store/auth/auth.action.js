@@ -1,13 +1,13 @@
 
 
-export const LOGIN = "LOGIN";
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
 
-export function setCurrentUser(username, password) {
+export function setCurrentUser(username, email) {
     return {
-        type: LOGIN,
+        type: SET_CURRENT_USER,
         payload: {
             username: username,
-            password: password
+            email: email
         }
     }
 }

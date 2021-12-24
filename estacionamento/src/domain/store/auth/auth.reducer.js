@@ -1,4 +1,4 @@
-import { LOGIN } from './auth.action';
+import { SET_CURRENT_USER } from './auth.action';
 
 const initialSate = {
     currentUser: {
@@ -9,9 +9,10 @@ const initialSate = {
 
 export default function(state = initialSate, action) {
     switch(action.type) {
-        case LOGIN: return {
+        // case SET_CURRENT_USER: return state
+        case SET_CURRENT_USER: return {
             ...state,
-            min: action.payload
+            currentUser: action.payload
         }
         default: return state;
     }

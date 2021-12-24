@@ -1,16 +1,19 @@
-import { alterarNumeroMinimo } from "domain/store/auth/auth.action";
+import { setCurrentUser } from "domain/store/auth/auth.action";
 import AppInputComponent from "presentation/components/app-input/app-input.component";
 import React from "react";
 import { connect } from 'react-redux';
 
 const AboutPage = props => {
 
-    const { min, max } = props;
+    const { currentUser } = props;
 
     return (
         <aside className="AboutPage">
-            About Page ss { min }
+            About Page ss { currentUser.username }
             <AppInputComponent></AppInputComponent>
+            <button onClick={ () => {
+                props.setCurrentUser("teste1", "teste1@teste.com.br");
+            }}>Add</button>
         </aside>
     );
     
@@ -18,16 +21,15 @@ const AboutPage = props => {
 
 function mapStateToProps(state) {
     return {
-        min: state.numeros.min,
-        max: state.numeros.max
+        currentUser: state.authReducer.currentUser
     }
-
 }
+
 
 function mapDispatchtoProps(dispatch) {
     return {
-        alterarMinimo(novoNumero) {
-            const action = alterarNumeroMinimo(novoNumero);
+        setCurrentUser(username, email) {
+            const action = setCurrentUser(username, email);
             dispatch(action);
         }
     }

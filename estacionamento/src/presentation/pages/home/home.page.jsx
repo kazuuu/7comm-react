@@ -1,4 +1,4 @@
-import { alterarNumeroMinimo } from "domain/store/auth/auth.action";
+import { setCurrentUser } from "domain/store/auth/auth.action";
 import React from "react";
 import { connect } from 'react-redux';
 
@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 const HomePage = props => {
 
-    const { min, max } = props;
+    const { currentUser } = props;
 
     return (
         <>
@@ -27,31 +27,26 @@ const HomePage = props => {
                 </Row>
             </Container>
             <aside className="HomePage">
-                Home Page ss { min }
-                <button onClick={ () => {
-                    console.log("btnNumeroMinimo");
-                    props.alterarMinimo(min + 1) 
-                    console.log(min);
-                }}>Add</button>
+                Home Page ss { currentUser.username }
 
                 <AboutPage />
 
             </aside>    
             <Button>Show Toast</Button>
         </>
-    )}
+    )
+}
 
 function mapStateToProps(state) {
     return {
-        min: state.numeros.min,
-        max: state.numeros.max
+        currentUser: state.authReducer.currentUser
     }
 }
-
+    
 function mapDispatchtoProps(dispatch) {
     return {
-        alterarMinimo(novoNumero) {
-            const action = alterarNumeroMinimo(novoNumero);
+        setCurrentUser() {
+            const action = setCurrentUser();
             dispatch(action);
         }
     }
