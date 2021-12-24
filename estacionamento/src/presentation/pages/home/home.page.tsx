@@ -1,4 +1,4 @@
-import { setCurrentUser } from "domain/store/auth/auth.action";
+// import { setCurrentUser } from "../../../domain/store/auth/auth.action";
 import React from "react";
 import { connect } from 'react-redux';
 
@@ -45,10 +45,10 @@ function mapStateToProps(state) {
     
 function mapDispatchtoProps(dispatch) {
     return {
-        setCurrentUser() {
-            const action = setCurrentUser();
-            dispatch(action);
-        }
+        // setCurrentUser() {
+        //     const action = setCurrentUser();
+        //     dispatch(action);
+        // }
     }
 }
 export default connect(mapStateToProps, mapDispatchtoProps)(HomePage);
