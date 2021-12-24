@@ -14,3 +14,9 @@ O propósito deste projeto é aprender React e Redux com uma arquitetura base pa
 - npm install redux
 - npm install react-redux
 3.2 Criar o store config e configurar no index.js
+
+
+
+# Dependencies Info
+- NodeJS v16.13.1
+- React JS v17.0.2
