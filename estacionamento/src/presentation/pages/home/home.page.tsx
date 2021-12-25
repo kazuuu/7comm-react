@@ -10,11 +10,18 @@ import {
     Row
 } from 'react-bootstrap';
 import { Link } from "react-router-dom";
+import { UserModel } from "../../../domain/models";
 
-const HomePage = props => {
 
-    const { currentUser } = props;
+interface RootState {
+    currentUser: UserModel
+}
 
+type Props = {
+    currentUser: UserModel
+}
+
+const HomePage: React.FC<Props>  = ({ currentUser }: Props) => {
     return (
         <>
                 <Link to="/about">[About]</Link>
@@ -37,7 +44,7 @@ const HomePage = props => {
     )
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: RootState) {
     return {
         currentUser: state.authReducer.currentUser
     }
@@ -51,4 +58,5 @@ function mapDispatchtoProps(dispatch) {
         // }
     }
 }
+
 export default connect(mapStateToProps, mapDispatchtoProps)(HomePage);
