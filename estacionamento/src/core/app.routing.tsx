@@ -1,6 +1,6 @@
-import AboutPage from "presentation/pages/about/about.page";
-import HomePage from "presentation/pages/home/home.page";
-import NotFoundPage from "presentation/pages/not-found/not-found.page.";
+import AboutPage from "../presentation/pages/about/about.page";
+import HomePage from "../presentation/pages/home/home.page";
+import NotFoundPage from "../presentation/pages/not-found/not-found.page";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 

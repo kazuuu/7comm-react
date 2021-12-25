@@ -7,12 +7,13 @@ import { Provider } from 'react-redux';
 import storeConfig from './domain/store/store.config';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import App from 'core/app';
+import App from './core/app';
+import { AnyAction } from 'redux';
 
 const store = storeConfig();
 
 ReactDOM.render(
-  <Provider store={ store }>
+  <Provider<AnyAction> store={ store }>
     <React.StrictMode>
       <App />
     </React.StrictMode>

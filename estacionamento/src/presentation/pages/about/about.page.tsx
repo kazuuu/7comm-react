@@ -1,5 +1,5 @@
-import { setCurrentUser } from "domain/store/auth/auth.action";
-import AppInputComponent from "presentation/components/app-input/app-input.component";
+import { setCurrentUser } from "../../../domain/store/auth/auth.action";
+import AppInputComponent from "../../components/app-input/app-input.component";
 import React from "react";
 import { connect } from 'react-redux';
 
