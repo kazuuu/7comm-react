@@ -1,6 +1,6 @@
 import React from "react";
 
-const NotFoundPage = props => (
+const NotFoundPage = () => (
     <aside className="NotFoundPage">
         Not Found Page
     </aside>

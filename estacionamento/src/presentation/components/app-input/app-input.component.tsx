@@ -1,6 +1,6 @@
 import React from "react";
 
-const AppInputComponent = props => (
+const AppInputComponent = () => (
     <input></input>
 );
 

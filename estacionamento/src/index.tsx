@@ -4,20 +4,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 import { Provider } from 'react-redux';
-import storeConfig from './domain/store/store.config';
+import StoreConfig from './domain/store/store.config';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './core/app';
 import { AnyAction } from 'redux';
 
-const store = storeConfig();
-
 ReactDOM.render(
-  <Provider<AnyAction> store={ store }>
-    <React.StrictMode>
+  <React.StrictMode>
+    <Provider<AnyAction> store={ StoreConfig }>
       <App />
-    </React.StrictMode>
-  </Provider>,
+    </Provider>
+  </React.StrictMode>,
   document.getElementById('root')
 );
 

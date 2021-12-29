@@ -1,19 +1,44 @@
-import { SET_CURRENT_USER } from './auth.action';
+import { Reducer } from "redux";
+import { UserModel } from "../../models";
+import { AuthType, AuthDispatchTypes } from "./auth.type"
 
-const initialSate = {
+export interface AuthState {
+    readonly isLogged: boolean,
+    readonly errorMsg: string,
+    readonly currentUser: UserModel
+}
+
+
+const initialState: AuthState = {
+    isLogged: false,
+    errorMsg: "",
     currentUser: {
-        username: "admin",
-        email: "admin@teste.com"
+        username: "",
+        email: ""
     },
 }
 
-export default function(state = initialSate, action) {
-    switch(action.type) {
-        // case SET_CURRENT_USER: return state
-        case SET_CURRENT_USER: return {
-            ...state,
-            currentUser: action.payload
-        }
-        default: return state;
+const authReducer = (state: AuthState = initialState, action: AuthDispatchTypes) => {
+    switch (action.type) {
+        case AuthType.SET_CURRENT_USER:
+            return { ...state, currentUser: action.payload };
+        default:
+            return state;
     }
-}
+};
+  
+export default authReducer;
+
+
+
+
+// export default function(state = INITIAL_STATE, action) {
+//     switch(action.type) {
+//         // case SET_CURRENT_USER: return state
+//         case SET_CURRENT_USER: return {
+//             ...state,
+//             currentUser: action.payload
+//         }
+//         default: return state;
+//     }
+// }

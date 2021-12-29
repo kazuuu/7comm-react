@@ -1,17 +1,8 @@
     import { createStore, combineReducers } from 'redux';
-    import authReducer from "./auth/auth.reducer";
-    
-    const reducers = combineReducers({
-        authReducer: authReducer,
-        nomes: function(state, action) {
-            return [
-                'A',
-                'B',
-                'C'               
-            ]
-        },
-    });
+import RootReducer from './root/root.reducer';
 
-    export default function storeConfig() {
-        return createStore(reducers);
-    }
+const StoreConfig = createStore(RootReducer);
+
+// export type RootStore = ReturnType<typeof RootReducer>
+
+export default StoreConfig;

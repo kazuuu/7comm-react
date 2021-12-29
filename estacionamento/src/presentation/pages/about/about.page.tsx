@@ -2,36 +2,43 @@ import { setCurrentUser } from "../../../domain/store/auth/auth.action";
 import AppInputComponent from "../../components/app-input/app-input.component";
 import React from "react";
 import { connect } from 'react-redux';
+import { UserModel } from "../../../domain/models";
 
-const AboutPage = props => {
+interface RootState {
+    currentUser: UserModel
+}
 
-    const { currentUser } = props;
+type DispatchProps = {
+}
 
+type Props = {
+    currentUser: UserModel
+}
+
+
+const AboutPage: React.FC<Props>  = ({ currentUser }: Props) => {
     return (
-        <aside className="AboutPage">
-            About Page ss { currentUser.username }
-            <AppInputComponent></AppInputComponent>
-            <button onClick={ () => {
-                props.setCurrentUser("teste1", "teste1@teste.com.br");
-            }}>Add</button>
-        </aside>
-    );
+        <>
+            <aside className="AboutPage">
+                About Page ss { currentUser.username }
+            </aside>    
+        </>
+    )
+}
+
+function mapStateToProps(state: RootState) {
+    return {
+        currentUser: state.currentUser
+    }
+}
     
-}
-
-function mapStateToProps(state) {
+function mapDispatchtoProps(dispatch: DispatchProps) {
     return {
-        currentUser: state.authReducer.currentUser
+        // setCurrentUser() {
+        //     const action = setCurrentUser();
+        //     dispatch(action);
+        // }
     }
 }
 
-
-function mapDispatchtoProps(dispatch) {
-    return {
-        setCurrentUser(username, email) {
-            const action = setCurrentUser(username, email);
-            dispatch(action);
-        }
-    }
-}
 export default connect(mapStateToProps, mapDispatchtoProps)(AboutPage);

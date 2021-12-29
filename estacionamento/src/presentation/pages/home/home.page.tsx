@@ -17,9 +17,13 @@ interface RootState {
     currentUser: UserModel
 }
 
+type DispatchProps = {
+}
+
 type Props = {
     currentUser: UserModel
 }
+
 
 const HomePage: React.FC<Props>  = ({ currentUser }: Props) => {
     return (
@@ -34,7 +38,7 @@ const HomePage: React.FC<Props>  = ({ currentUser }: Props) => {
                 </Row>
             </Container>
             <aside className="HomePage">
-                Home Page ss { currentUser.username }
+                Home Page ss 
 
                 <AboutPage />
 
@@ -46,11 +50,11 @@ const HomePage: React.FC<Props>  = ({ currentUser }: Props) => {
 
 function mapStateToProps(state: RootState) {
     return {
-        currentUser: state.authReducer.currentUser
+        currentUser: state.currentUser
     }
 }
     
-function mapDispatchtoProps(dispatch) {
+function mapDispatchtoProps(dispatch: DispatchProps) {
     return {
         // setCurrentUser() {
         //     const action = setCurrentUser();

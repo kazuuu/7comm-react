@@ -4,7 +4,7 @@ import NotFoundPage from "../presentation/pages/not-found/not-found.page";
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
-const AppRoutingContent = props => (
+const AppRoutingContent = () => (
     <main className="ContentComponent">
         <Switch>
             <Route exact path="/">
