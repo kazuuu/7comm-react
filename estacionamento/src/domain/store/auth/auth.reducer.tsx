@@ -1,3 +1,4 @@
+import { AnyAction } from 'redux';
 import { SET_CURRENT_USER } from './auth.action';
 
 const initialSate = {
@@ -7,7 +8,7 @@ const initialSate = {
     },
 }
 
-export default function(state = initialSate, action) {
+export default function(state = initialSate, action: AnyAction) {
     switch(action.type) {
         // case SET_CURRENT_USER: return state
         case SET_CURRENT_USER: return {

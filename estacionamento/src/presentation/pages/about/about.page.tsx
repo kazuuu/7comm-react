@@ -1,37 +1,57 @@
-import { setCurrentUser } from "../../../domain/store/auth/auth.action";
-import AppInputComponent from "../../components/app-input/app-input.component";
 import React from "react";
 import { connect } from 'react-redux';
+import { 
+    Button,
+    Container,
+    Col,
+    Row
+} from 'react-bootstrap';
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
+import { UserModel } from "../../../domain/models";
 
-const AboutPage = props => {
-
-    const { currentUser } = props;
-
-    return (
-        <aside className="AboutPage">
-            About Page ss { currentUser.username }
-            <AppInputComponent></AppInputComponent>
-            <button onClick={ () => {
-                props.setCurrentUser("teste1", "teste1@teste.com.br");
-            }}>Add</button>
-        </aside>
-    );
-    
+interface AboutState {
+    // currentUser: UserModel
 }
 
-function mapStateToProps(state) {
-    return {
-        currentUser: state.authReducer.currentUser
+interface AboutProps extends RouteComponentProps<any> {
+    // currentUser: UserModel
+}
+
+class AboutPage extends React.Component<AboutProps, AboutState> {
+    constructor(props: AboutProps) {
+      super(props);
+    }
+
+    public render(): JSX.Element {     
+        return (
+            <>
+                <Container fluid>
+                    <Row>
+                        <Col md={1}>
+                            <Link to="/">[HomePage]</Link>
+                        </Col>
+                        <Col md={1}>
+                            AboutPage
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={12}>
+                            <Button>Teste</Button>
+                        </Col>
+                    </Row>
+                </Container>                
+            </>
+        )
     }
 }
 
-
-function mapDispatchtoProps(dispatch) {
-    return {
-        setCurrentUser(username, email) {
-            const action = setCurrentUser(username, email);
-            dispatch(action);
-        }
+const connectModule = connect(
+    (state) => ({
+      // Map state to props
+    }),
+    {
+      // Map dispatch to props
     }
-}
-export default connect(mapStateToProps, mapDispatchtoProps)(AboutPage);
+)(AboutPage);
+  
+export default withRouter(connectModule);

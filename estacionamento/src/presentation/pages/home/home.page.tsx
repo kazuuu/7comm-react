@@ -1,62 +1,57 @@
-// import { setCurrentUser } from "../../../domain/store/auth/auth.action";
 import React from "react";
 import { connect } from 'react-redux';
-
-import AboutPage from "../about/about.page"
 import { 
     Button,
     Container,
     Col,
     Row
 } from 'react-bootstrap';
-import { Link } from "react-router-dom";
-import { UserModel } from "../../../domain/models";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 
-
-interface RootState {
-    currentUser: UserModel
+interface HomeState {
+    // currentUser: UserModel
 }
 
-type Props = {
-    currentUser: UserModel
+interface HomeProps extends RouteComponentProps<any> {
+    // currentUser: UserModel
 }
 
-const HomePage: React.FC<Props>  = ({ currentUser }: Props) => {
-    return (
-        <>
-                <Link to="/about">[About]</Link>
-
-            <Container fluid>
-                <Row>
-                    <Col md={2}>1 of 1</Col>
-                    <Col md={5}>1 of 1</Col>
-                    <Col md={5}>1 of 1</Col>
-                </Row>
-            </Container>
-            <aside className="HomePage">
-                Home Page ss { currentUser.username }
-
-                <AboutPage />
-
-            </aside>    
-            <Button>Show Toast</Button>
-        </>
-    )
-}
-
-function mapStateToProps(state: RootState) {
-    return {
-        currentUser: state.authReducer.currentUser
+class HomePage extends React.Component<HomeProps, HomeState> {
+    constructor(props: HomeProps) {
+      super(props);
     }
-}
-    
-function mapDispatchtoProps(dispatch) {
-    return {
-        // setCurrentUser() {
-        //     const action = setCurrentUser();
-        //     dispatch(action);
-        // }
+
+    public render(): JSX.Element {     
+        return (
+            <>
+                <Container fluid>
+                    <Row>
+                        <Col md={1}>
+                            HomePage
+                        </Col>
+                        <Col md={1}>
+                            <Link to="/about">[AboutPage]</Link>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md={12}>
+                            <Button>Teste</Button>
+                        </Col>
+                    </Row>
+                </Container>                
+            </>
+
+        )
     }
 }
 
-export default connect(mapStateToProps, mapDispatchtoProps)(HomePage);
+const connectModule = connect(
+    (state) => ({
+      // Map state to props
+    }),
+    {
+      // Map dispatch to props
+    }
+)(HomePage);
+  
+export default withRouter(connectModule);

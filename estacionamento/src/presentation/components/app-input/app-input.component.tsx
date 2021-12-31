@@ -1,7 +1,9 @@
-import React from "react";
+import React, { FC } from "react";
 
-const AppInputComponent = props => (
-    <input></input>
-);
+const AppInputComponent:FC<any> = () => {
+   return (
+        <input></input>
+   );
+}
 
 export default AppInputComponent;
