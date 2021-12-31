@@ -7,13 +7,15 @@ import {
     Row
 } from 'react-bootstrap';
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
+import { UserModel } from "../../../domain/models";
+// import { RootState } from "../../../domain/store/store.config";
 
 interface HomeState {
-    // currentUser: UserModel
+    currentUser: UserModel
 }
 
 interface HomeProps extends RouteComponentProps<any> {
-    // currentUser: UserModel
+    currentUser: UserModel
 }
 
 class HomePage extends React.Component<HomeProps, HomeState> {
@@ -27,7 +29,7 @@ class HomePage extends React.Component<HomeProps, HomeState> {
                 <Container fluid>
                     <Row>
                         <Col md={1}>
-                            HomePage
+                            HomePage { this.props.currentUser.email}
                         </Col>
                         <Col md={1}>
                             <Link to="/about">[AboutPage]</Link>
@@ -46,11 +48,14 @@ class HomePage extends React.Component<HomeProps, HomeState> {
 }
 
 const connectModule = connect(
-    (state) => ({
-      // Map state to props
+    (state: any) => ({
+        currentUser: state.authReducer.currentUser
     }),
     {
-      // Map dispatch to props
+        // setCurrentUser() {
+        //     const action = setCurrentUser();
+        //     dispatch(action);
+        // }
     }
 )(HomePage);
   
