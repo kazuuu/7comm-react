@@ -8,13 +8,15 @@ import {
 } from 'react-bootstrap';
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { UserModel } from "../../../domain/models";
+import { setCurrentUser } from "../../../domain/store/auth/auth.action";
 
 interface AboutState {
-    // currentUser: UserModel
+    currentUser: UserModel
 }
 
 interface AboutProps extends RouteComponentProps<any> {
-    // currentUser: UserModel
+    currentUser: UserModel,
+    setCurrentUser(username: string, email: string): any,
 }
 
 class AboutPage extends React.Component<AboutProps, AboutState> {
@@ -27,17 +29,21 @@ class AboutPage extends React.Component<AboutProps, AboutState> {
             <>
                 <Container fluid>
                     <Row>
-                        <Col md={1}>
+                        <Col md={2}>
                             <Link to="/">[HomePage]</Link>
                         </Col>
-                        <Col md={1}>
+                        <Col md={2}>
                             AboutPage
                         </Col>
                     </Row>
                     <Row>
-                        <Col md={12}>
-                            <Button>Teste</Button>
+                        <Col md={2}>
+                            <Button onClick={() => {this.props.setCurrentUser("aboutUser", "aboutUser@teste.com");}}>setAboutUser</Button>
                         </Col>
+                        <Col md={2}>
+                            { this.props.currentUser.email}
+                        </Col>
+
                     </Row>
                 </Container>                
             </>
@@ -46,12 +52,15 @@ class AboutPage extends React.Component<AboutProps, AboutState> {
 }
 
 const connectModule = connect(
-    (state) => ({
-      // Map state to props
+    (state: any) => ({
+        currentUser: state.authReducer.currentUser
     }),
-    {
-      // Map dispatch to props
-    }
+    (dispatch, ownProps) => ({
+        setCurrentUser(username: string, email: string) {
+            const action = setCurrentUser(username, email);
+            dispatch(action);
+        }
+    }),
 )(AboutPage);
   
 export default withRouter(connectModule);
