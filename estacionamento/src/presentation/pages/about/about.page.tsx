@@ -41,7 +41,8 @@ class AboutPage extends React.Component<AboutProps, AboutState> {
                             <Button onClick={() => {this.props.setCurrentUser("aboutUser", "aboutUser@teste.com");}}>setAboutUser</Button>
                         </Col>
                         <Col md={2}>
-                            { this.props.currentUser.email}
+                        { this.props.currentUser.username}<br />
+                        { this.props.currentUser.email}
                         </Col>
 
                     </Row>

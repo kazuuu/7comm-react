@@ -8,7 +8,7 @@ import {
 } from 'react-bootstrap';
 import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import { UserModel } from "../../../domain/models";
-import { setCurrentUser } from "../../../domain/store/auth/auth.action";
+import { setCurrentUser, signIn } from "../../../domain/store/auth/auth.action";
 // import { RootState } from "../../../domain/store/store.config";
 
 interface HomeState {
@@ -18,6 +18,7 @@ interface HomeState {
 interface HomeProps extends RouteComponentProps<any> {
     currentUser: UserModel,
     setCurrentUser(username: string, email: string): any,
+    signIn(username: string, password: string): any,
 }
 
 class HomePage extends React.Component<HomeProps, HomeState> {
@@ -40,8 +41,10 @@ class HomePage extends React.Component<HomeProps, HomeState> {
                     <Row>
                         <Col md={2}>
                             <Button onClick={() => {this.props.setCurrentUser("homeUser", "homeUser@teste.com");}}>setHomeUser</Button>
+                            <Button onClick={() => {this.props.signIn("user1", "123");}}>SignIn</Button>
                         </Col>
                         <Col md={2}>
+                            { this.props.currentUser.username}<br />
                             { this.props.currentUser.email}
                         </Col>
                     </Row>
@@ -60,6 +63,11 @@ const connectModule = connect(
         setCurrentUser(username: string, email: string) {
             const action = setCurrentUser(username, email);
             dispatch(action);
+        },
+        signIn(username: string, password: string) {
+            signIn(username, password);
+            // const action = signIn(username, password);
+            // dispatch(action);
         }
     }),
 )(HomePage);
