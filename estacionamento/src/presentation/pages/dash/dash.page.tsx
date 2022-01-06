@@ -16,7 +16,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { connect } from 'react-redux';
 import { loginUser } from '../../../domain/redux/actions/userActions';
 
-function HomePage(props: any) {
+function DashPage(props: any) {
     const [values, setValues] = useState({
         email: '',
         password: ''
@@ -58,7 +58,7 @@ function HomePage(props: any) {
 
     return (
         <Box>
-            HOME Public
+            DashBoard Authenticated
         </Box>
     )
 }
@@ -74,4 +74,4 @@ const mapActionsToProps = {
  loginUser
 };
 
-export default connect(mapStateToProps, mapActionsToProps)(HomePage);
+export default connect(mapStateToProps, mapActionsToProps)(DashPage);
