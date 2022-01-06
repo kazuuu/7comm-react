@@ -1,1 +1,1 @@
-export * from './http_client.config';
+export * from './axios_http_client.config';
