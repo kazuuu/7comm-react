@@ -2,7 +2,7 @@
 import { SET_CURRENT_USER, SET_ERRORS, LOADING_UI, CLEAR_ERRORS, LOGOUT, SET_LOADING } from '../types';
 import axios from 'axios';
 
-import { HttpClient } from '../../../core/config/http/http_client.config';
+import { HttpClient } from '../../../core/config/http/http_client';
 
 export const loginUser =  (userData: any, history: any) => (dispatch: any) => {
     dispatch({ type: LOADING_UI })

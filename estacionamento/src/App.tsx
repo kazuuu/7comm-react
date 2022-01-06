@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Routes, Route, BrowserRouter, Navigate, Link, 
 import { Provider } from 'react-redux';
 import store from './domain/redux/store';
 import { CheckAuthentication } from './core/helpers/CheckAuthentication';
-import AppRouting from './core/config/router/router.config';
+import AppRouter from './core/config/router/app.router';
 
 const App: React.FC = () => {
     useEffect(() => {
@@ -16,23 +16,10 @@ const App: React.FC = () => {
     return (
         <>
             <Provider store={store}>
-                <AppRouting />
+                <AppRouter />
             </Provider>
         </>
     );
-}
-
-const Public = () => <div>public</div>;
-const Private = () => <div>private</div>;
-
-function MyMenu() {
-return (
-    <nav>
-    <Link to="/">Public</Link>
-    {" | "}
-    <Link to="/private-outlet">Private Using Outlet</Link>
-    </nav>
-);
 }
   
 export default App;

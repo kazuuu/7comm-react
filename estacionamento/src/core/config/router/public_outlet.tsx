@@ -6,7 +6,7 @@ interface MyRouteProps extends RouteProps{
     isAuthenticated:boolean;
 }
 
-const GuestOutlet = (props: MyRouteProps) => {
+const PublicOutlet = (props: MyRouteProps) => {
     console.log("PublicOutlet", props.isAuthenticated)
     return <Outlet />;
 }
@@ -15,4 +15,4 @@ const mapStateToProps = (state:any) => ({
     isAuthenticated: state.user.isAuthenticated
 });
 
-export default connect(mapStateToProps)(GuestOutlet)
+export default connect(mapStateToProps)(PublicOutlet)
