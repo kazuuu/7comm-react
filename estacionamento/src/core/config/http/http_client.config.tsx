@@ -1,7 +1,6 @@
 import axios, { AxiosResponse, AxiosRequestConfig } from 'axios';
 
-export class AxiosHttpClient {
-
+export class HttpClient {
     async post (url: string, data: String): Promise<AxiosResponse> {
         let axiosResponse: AxiosResponse;
 

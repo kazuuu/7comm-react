@@ -2,16 +2,13 @@
 import { SET_CURRENT_USER, SET_ERRORS, LOADING_UI, CLEAR_ERRORS, LOGOUT, SET_LOADING } from '../types';
 import axios from 'axios';
 
-import { AxiosHttpClient } from '../../../core/config/http/axios_http_client.config';
-
-import { useNavigate } from 'react-router-dom';
+import { HttpClient } from '../../../core/config/http/http_client.config';
 
 export const loginUser =  (userData: any, history: any) => (dispatch: any) => {
     dispatch({ type: LOADING_UI })
 
-    let httpClient = new AxiosHttpClient();
+    let httpClient = new HttpClient();
 
-    // axios.post('http://localhost:8080/login', userData)
     httpClient.post('http://localhost:8080/login', userData)
     .then((res) => {
         console.log('success', res.data);
