@@ -1,7 +1,7 @@
 // in store.ts
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
-import UserReducer from './auth/user.reducer'
+import AuthReducer from './auth/auth.reducer'
 import UiReducer from './ui/ui.reducer'
 
 const initialState = {};
@@ -16,7 +16,7 @@ declare global {
 }
 
 const reducer = combineReducers({
-    user: UserReducer,//user key ma store gareko
+    user: AuthReducer,//user key ma store gareko
     UI: UiReducer
 });
 
