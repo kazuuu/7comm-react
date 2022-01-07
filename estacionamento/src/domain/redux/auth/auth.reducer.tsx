@@ -1,5 +1,5 @@
 //in userReducer.ts
-import { SET_CURRENT_USER, LOGOUT, SET_LOADING } from '../types';
+import { AuthType } from '../auth/auth.type';
 
 const initialState = {
     isAuthenticated: false,
@@ -12,15 +12,15 @@ const initialState = {
 
 export default function (state = initialState, action:any) {
     switch (action.type) {
-        case SET_CURRENT_USER:
+        case AuthType.SET_CURRENT_USER:
             return {
                 ...state,
                 isAuthenticated: true,
                 currentUser: action.payload,
             };
-        case LOGOUT:
+        case AuthType.LOGOUT:
             return initialState;
-        case SET_LOADING:
+        case AuthType.SET_LOADING:
             return {
                 ...state,
                 loading: action.payload,

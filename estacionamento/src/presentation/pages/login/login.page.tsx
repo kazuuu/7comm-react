@@ -16,6 +16,7 @@ import { connect } from 'react-redux';
 import { loginUser } from '../../../domain/redux/auth/auth.action';
 
 function Login(props: any) {
+    const navigate = useNavigate();
     const [values, setValues] = useState({
         email: '',
         password: ''
@@ -51,7 +52,7 @@ function Login(props: any) {
 
         console.log('Login isAuthenticated 1', props.isAuthenticated);
 
-        props.loginUser(userData, props.history);
+        props.loginUser(userData, navigate);
 
         // let navigate = useNavigate();
         // navigate("/dash");

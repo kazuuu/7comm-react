@@ -1,4 +1,4 @@
-import { SET_ERRORS, LOADING_UI, CLEAR_ERRORS } from '../types'
+import { UiType } from '../ui/ui.type';
 
 const initialState = {
     loading: false,
@@ -7,19 +7,19 @@ const initialState = {
 
 export default function (state = initialState, action:any) {
     switch (action.type) {
-        case SET_ERRORS:
+        case UiType.SET_ERRORS:
             return {
                 ...state,
                 loading: false,
                 errors: action.payload
             };
-        case CLEAR_ERRORS:
+        case UiType.CLEAR_ERRORS:
             return {
                 ...state,
                 loading: false,
                 errors: null
             };
-        case LOADING_UI:
+        case UiType.LOADING_UI:
             return {
                 ...state,
                 loading: true
