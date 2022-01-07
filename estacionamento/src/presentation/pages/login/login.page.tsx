@@ -14,8 +14,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
 //redux stuff
 import { connect } from 'react-redux';
-import { loginUser } from '../../../domain/redux/actions/userActions';
 import { useForm } from "react-hook-form";
+import { loginUser } from '../../../domain/redux/auth/user.action';
 
 function Login(props: any) {
     const [values, setValues] = useState({

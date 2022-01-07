@@ -14,7 +14,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
 //redux stuff
 import { connect } from 'react-redux';
-import { loginUser } from '../../../domain/redux/actions/userActions';
+import { loginUser } from '../../../domain/redux/auth/user.action';
 
 function DashPage(props: any) {
     const [values, setValues] = useState({
