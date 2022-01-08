@@ -1,5 +1,5 @@
 //in userReducer.ts
-import { AuthType } from '../auth/auth.type';
+import { AuthType } from './auth.type';
 
 const initialState = {
     isAuthenticated: false,

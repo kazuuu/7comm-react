@@ -13,7 +13,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
 //redux stuff
 import { connect } from 'react-redux';
-import { signIn } from '../../../domain/redux/auth/auth.action';
+import { signIn } from '../../../domain/services/auth/auth.service';
 
 function Login(props: any) {
     const navigate = useNavigate();

@@ -1,4 +1,4 @@
-import { UiType } from '../ui/ui.type';
+import { UiType } from './ui.type';
 
 const initialState = {
     loading: false,

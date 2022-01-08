@@ -1,6 +1,6 @@
 //in useActions.ts file
 // import { SET_CURRENT_USER, SET_ERRORS, LOADING_UI, CLEAR_ERRORS, LOGOUT, SET_LOADING } from '../types';
-import { AuthType } from '../auth/auth.type';
+import { AuthType } from './auth.type';
 import { UiType } from '../ui/ui.type';
 // import { SET_CURRENT_USER, SET_ERRORS, LOADING_UI, CLEAR_ERRORS, LOGOUT, SET_LOADING } from '../types';
 // import axios from 'axios';
@@ -14,7 +14,6 @@ import { NavigateFunction } from 'react-router-dom';
 import { authRepository } from '../../../data/repositories/auth.repository'
 import { UserModel } from '../../models/user.model';
 import { SsoDTO } from '../../models/dtos/sso.dto';
-
 
 export const signIn =  (userData: any, navigate: NavigateFunction) => async (dispatch: Dispatch) => {
     dispatch({ type: UiType.LOADING_UI })
