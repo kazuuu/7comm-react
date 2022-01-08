@@ -4,6 +4,7 @@ import { AuthType } from '../auth/auth.type';
 import { UiType } from '../ui/ui.type';
 // import { SET_CURRENT_USER, SET_ERRORS, LOADING_UI, CLEAR_ERRORS, LOGOUT, SET_LOADING } from '../types';
 // import axios from 'axios';
+import { Dispatch } from 'redux';
 import store from '../store';
 import jwtDecode from 'jwt-decode'; //you must install jwt-decode using npm
 import { LocalStorageSource } from '../../../data/sources/local_storage.source';
@@ -11,38 +12,27 @@ import { LocalStorageSource } from '../../../data/sources/local_storage.source';
 import { HttpClient } from '../../../core/config/http/http_client';
 import { NavigateFunction } from 'react-router-dom';
 import { authRepository } from '../../../data/repositories/auth.repository'
+import { UserModel } from '../../models/user.model';
+import { SsoDTO } from '../../models/dtos/sso.dto';
 
 
-export const loginUser =  (userData: any, navigate: NavigateFunction) => (dispatch: any) => {
-    console.log("login 1", userData);
+export const signIn =  (userData: any, navigate: NavigateFunction) => async (dispatch: Dispatch) => {
     dispatch({ type: UiType.LOADING_UI })
-    
-    authRepository.signIn(userData.username, userData.password)
-    .then((res) => {
-        console.log('login 2', res);
 
-        LocalStorageSource.setObject('access_token', res.data.token);
-        LocalStorageSource.setObject('current_user', res.data.me);
+    const ssoDTO: SsoDTO = await authRepository.signIn(userData.username, userData.password);
 
-        dispatch({
-            type: AuthType.SET_CURRENT_USER,
-            payload: res.data.me
-        });
-        console.log('login 3');
+    LocalStorageSource.setString('access_token', ssoDTO.token);
+    LocalStorageSource.setObject('current_user', ssoDTO.me);
 
-        // dispatch(getUserData());
-        dispatch({ type: UiType.CLEAR_ERRORS });
-        navigate('/dash');
-        // window.location.href = '/dash'; // redirect to login page
-        console.log('login 4');
-    })
-    .catch((err) => {
-        console.log("login 5", err);
-        dispatch({
-            type: UiType.SET_ERRORS,
-            payload: err.response.data
-        });
+    dispatch({
+        type: AuthType.SET_CURRENT_USER,
+        payload: ssoDTO.me,
     });
+
+    // dispatch(getUserData());
+    dispatch({ type: UiType.CLEAR_ERRORS });
+
+    navigate('/dash');
 }
 
 // // for fetching authenticated user information

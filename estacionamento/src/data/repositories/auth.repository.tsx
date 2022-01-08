@@ -1,12 +1,13 @@
 import { HttpClient } from "../../core/config/http/http_client";
 import { AxiosResponse } from 'axios';
+import { SsoDTO } from "../../domain/models/dtos/sso.dto";
 
 export const authRepository = {
     signIn,
     signOut,
 };
 
-function signIn(username: string, password: string) {
+async function signIn(username: string, password: string): Promise<SsoDTO> {
     let _axios = new HttpClient({authenticated: true}).instance;
 
     let body = {
@@ -16,10 +17,30 @@ function signIn(username: string, password: string) {
 
     return _axios.post('/login', body)
     // .then(handleResponse)
-    .then(data => {
-        return data;
-    });
+    .then(res => {
+        let ssoDTO: SsoDTO = SsoDTO.fromObject(res.data);
+
+        return ssoDTO;
+    });    
 }
+
+
+// function signIn(username: string, password: string): SsoDTO {
+//     let _axios = new HttpClient({authenticated: true}).instance;
+
+//     let body = {
+//         "username": username,
+//         password: password,
+//     }
+
+//     _axios.post('/login', body)
+//     // .then(handleResponse)
+//     .then(res => {
+//         let ssoDTO: SsoDTO = SsoDTO.fromObject(res.data);
+
+//         return ssoDTO;
+//     });
+// }
 
 function signOut() {
     // remove user from local storage to log user out
