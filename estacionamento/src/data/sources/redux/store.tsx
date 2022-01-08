@@ -1,8 +1,8 @@
 // in store.ts
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
-import AuthReducer from './auth/auth.reducer'
-import UiReducer from './ui/ui.reducer'
+import AuthReducer from './auth.reducer'
+import UiReducer from './ui.reducer'
 
 const initialState = {};
 

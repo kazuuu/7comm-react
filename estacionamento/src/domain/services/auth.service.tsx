@@ -1,19 +1,19 @@
 //in useActions.ts file
 // import { SET_CURRENT_USER, SET_ERRORS, LOADING_UI, CLEAR_ERRORS, LOGOUT, SET_LOADING } from '../types';
-import { AuthType } from './auth.type';
-import { UiType } from '../ui/ui.type';
+import { AuthType } from '../../data/sources/redux/auth.type';
+import { UiType } from '../../data/sources/redux/ui.type';
 // import { SET_CURRENT_USER, SET_ERRORS, LOADING_UI, CLEAR_ERRORS, LOGOUT, SET_LOADING } from '../types';
 // import axios from 'axios';
 import { Dispatch } from 'redux';
-import store from '../store';
+import store from '../../data/sources/redux/store';
 import jwtDecode from 'jwt-decode'; //you must install jwt-decode using npm
-import { LocalStorageSource } from '../../../data/sources/local_storage.source';
+import { LocalStorageSource } from '../../data/sources/local_storage.source';
 
-import { HttpClient } from '../../../core/config/http/http_client';
+import { HttpClient } from '../../core/config/http/http_client';
 import { NavigateFunction } from 'react-router-dom';
-import { authRepository } from '../../../data/repositories/auth.repository'
-import { UserModel } from '../../models/user.model';
-import { SsoDTO } from '../../models/dtos/sso.dto';
+import { authRepository } from '../../data/repositories/auth.repository'
+import { UserModel } from '../models/user.model';
+import { SsoDTO } from '../models/dtos/sso.dto';
 
 export const signIn =  (userData: any, navigate: NavigateFunction) => async (dispatch: Dispatch) => {
     dispatch({ type: UiType.LOADING_UI })
@@ -53,9 +53,9 @@ export const signIn =  (userData: any, navigate: NavigateFunction) => async (dis
 //     });
 // }
 
-export const logoutUser = () => (dispatch: any) => {
-    localStorage.removeItem('token');
-
+export const signOut = () => (dispatch: any) => {
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('current_user');
 
     dispatch({
         type: AuthType.LOGOUT
@@ -72,7 +72,7 @@ export const checkAuthentication = () => {
         const decodedToken:any = jwtDecode(access_token);
         console.log(decodedToken.iss);
         if (decodedToken.exp * 1000 < Date.now()) {
-            store.dispatch(logoutUser());
+            store.dispatch(signOut());
         } else {
             store.dispatch({ 
                 type: AuthType.SET_CURRENT_USER,

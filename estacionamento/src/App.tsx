@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Routes, Route, BrowserRouter, Navigate, Link, 
 
 //redux stuff
 import { Provider } from 'react-redux';
-import store from './domain/services/store';
-import { checkAuthentication } from './domain/services/auth/auth.service';
+import store from './data/sources/redux/store';
+import { checkAuthentication } from './domain/services/auth.service';
 import AppRouter from './core/config/router/app.router';
 
 const App: React.FC = () => {
