@@ -3,22 +3,21 @@
 import { AuthType } from '../auth/auth.type';
 import { UiType } from '../ui/ui.type';
 // import { SET_CURRENT_USER, SET_ERRORS, LOADING_UI, CLEAR_ERRORS, LOGOUT, SET_LOADING } from '../types';
-import axios from 'axios';
+// import axios from 'axios';
 import store from '../store';
 import jwtDecode from 'jwt-decode'; //you must install jwt-decode using npm
 import { LocalStorageSource } from '../../../data/sources/local_storage.source';
 
 import { HttpClient } from '../../../core/config/http/http_client';
 import { NavigateFunction } from 'react-router-dom';
+import { authRepository } from '../../../data/repositories/auth.repository'
+
 
 export const loginUser =  (userData: any, navigate: NavigateFunction) => (dispatch: any) => {
     console.log("login 1", userData);
     dispatch({ type: UiType.LOADING_UI })
-
-    let httpClient = new HttpClient();
-
-    // httpClient.post('http://localhost:8080/login', userData)
-    httpClient.post({url: '/login', data: userData})
+    
+    authRepository.signIn(userData.username, userData.password)
     .then((res) => {
         console.log('login 2', res);
 
@@ -30,8 +29,6 @@ export const loginUser =  (userData: any, navigate: NavigateFunction) => (dispat
             payload: res.data.me
         });
         console.log('login 3');
-
-        // axios.defaults.headers.common['Authorization'] = token; //setting authorize token to header in axios
 
         // dispatch(getUserData());
         dispatch({ type: UiType.CLEAR_ERRORS });
@@ -48,29 +45,28 @@ export const loginUser =  (userData: any, navigate: NavigateFunction) => (dispat
     });
 }
 
-// for fetching authenticated user information
-export const getUserData = () => (dispatch: any) => {
-    dispatch({ 
-        type: AuthType.SET_LOADING,
-        payload: true,
-    });
+// // for fetching authenticated user information
+// export const getUserData = () => (dispatch: any) => {
+//     dispatch({ 
+//         type: AuthType.SET_LOADING,
+//         payload: true,
+//     });
 
-    axios.get('/user')
-    .then(res => {
-        console.log('user data', res.data);
-        dispatch({
-            type: AuthType.SET_CURRENT_USER,
-            payload: res.data
-        });
-    }).catch(err => {
-        console.log(err);
-    });
-}
+//     axios.get('/user')
+//     .then(res => {
+//         console.log('user data', res.data);
+//         dispatch({
+//             type: AuthType.SET_CURRENT_USER,
+//             payload: res.data
+//         });
+//     }).catch(err => {
+//         console.log(err);
+//     });
+// }
 
 export const logoutUser = () => (dispatch: any) => {
     localStorage.removeItem('token');
 
-    delete axios.defaults.headers.common['Authorization']
 
     dispatch({
         type: AuthType.LOGOUT
@@ -94,7 +90,6 @@ export const checkAuthentication = () => {
                 payload: current_user,
             });
 
-            axios.defaults.headers.common['Authorization'] = `Bearer ${current_user}`;
         }
     }
 }
