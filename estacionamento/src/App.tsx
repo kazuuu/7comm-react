@@ -5,12 +5,14 @@ import { BrowserRouter as Router, Routes, Route, BrowserRouter, Navigate, Link, 
 //redux stuff
 import { Provider } from 'react-redux';
 import store from './data/sources/redux/store';
-import { checkAuthentication } from './domain/services/auth.service';
 import AppRouter from './core/config/router/app.router';
+import AuthService from './domain/services/auth.service';
 
 const App: React.FC = () => {
     useEffect(() => {
-        checkAuthentication();
+        let authService: AuthService = new AuthService();
+
+        authService.checkAuthentication();
     }, []);
 
     return (

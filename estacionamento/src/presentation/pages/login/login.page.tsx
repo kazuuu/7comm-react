@@ -13,7 +13,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
 //redux stuff
 import { connect } from 'react-redux';
-import { signIn } from '../../../domain/services/auth.service';
+import { signIn } from '../../../data/sources/redux/auth/auth.action';
+import AuthService from '../../../domain/services/auth.service';
 
 function Login(props: any) {
     const navigate = useNavigate();
@@ -50,15 +51,11 @@ function Login(props: any) {
             password: values.password,
         };
 
-        console.log('Login isAuthenticated 1', props.isAuthenticated);
+        // let authService: AuthService = new AuthService();
 
-        props.signIn(userData, navigate);
+        // authService.signIn(values.email, values.password, navigate);
 
-        // let navigate = useNavigate();
-        // navigate("/dash");
-
-        console.log('Login isAuthenticated 2', props.isAuthenticated);
-
+        props.signIn(values.email, values.password, navigate);
     }
 
     const handleChange = (e: any) => {
@@ -154,7 +151,7 @@ function Login(props: any) {
 
 //this map the states to our props in this functional component
 const mapStateToProps = (state: any) => ({
- isAuthenticated: state.user.isAuthenticated,
+ isAuthenticated: state.auth.isAuthenticated,
  UI: state.UI
 });
 

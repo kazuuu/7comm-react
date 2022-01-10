@@ -1,9 +1,8 @@
 import React, { FC } from "react";
 import { Link } from "react-router-dom";
-import { AuthType } from "../../data/sources/redux/auth.type";
-import { signOut } from "../../domain/services/auth.service";
 import store from '../../data/sources/redux/store';
 import { connect } from "react-redux";
+import { signOut } from "../../data/sources/redux/auth/auth.action";
 
 const MenuComponent:FC<any> = (props: any) => {
     const signOut = async (e: any) => {
@@ -30,7 +29,7 @@ const MenuComponent:FC<any> = (props: any) => {
 
 //this map the states to our props in this functional component
 const mapStateToProps = (state: any) => ({
-    isAuthenticated: state.user.isAuthenticated,
+    isAuthenticated: state.auth.isAuthenticated,
     UI: state.UI
 });
 

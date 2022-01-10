@@ -1,9 +1,20 @@
 //in userReducer.ts
 import { AuthType } from './auth.type';
 
-const initialState = {
+export interface IAuthState {
+    isAuthenticated: boolean,
+    loading: boolean,
+    access_token: String,
+    currentUser: {
+        username: String,
+        email: String,
+    },
+}
+
+const initialState: IAuthState = {
     isAuthenticated: false,
     loading: false,
+    access_token: "",
     currentUser: {
         username: "",
         email: ""
@@ -12,6 +23,12 @@ const initialState = {
 
 export default function (state = initialState, action:any) {
     switch (action.type) {
+        case AuthType.SET_ACCESS_TOKEN:
+            return {
+                ...state,
+                isAuthenticated: true,
+                access_token: action.payload,
+            };        
         case AuthType.SET_CURRENT_USER:
             return {
                 ...state,

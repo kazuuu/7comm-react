@@ -30,7 +30,7 @@ function DashPage(props: any) {
 
 //this map the states to our props in this functional component
 const mapStateToProps = (state: any) => ({
- user: state.user,
+ user: state.auth,
  UI: state.UI
 });
 

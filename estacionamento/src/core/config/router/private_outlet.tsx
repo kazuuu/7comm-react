@@ -13,7 +13,7 @@ const PrivateOutlet = (props: MyRouteProps) => {
 }
 
 const mapStateToProps = (state: any) => ({
-    isAuthenticated: state.user.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(mapStateToProps)(PrivateOutlet)

@@ -1,37 +1,44 @@
 import axios, { AxiosResponse, AxiosRequestConfig, AxiosRequestHeaders, AxiosInstance } from 'axios';
+import React, { Component } from 'react';
+import { connect, useSelector } from 'react-redux';
+import { UserModel } from '../../../domain/models/user.model';
+import AuthService from '../../../domain/services/auth.service';
 
+export interface IHttpClientProps {
+    config?: AxiosRequestConfig,
+    api?: boolean,
+    authenticated?: boolean,
+}
 
-export class HttpClient {
+export default class HttpClient { 
     private _axios: AxiosInstance;
 
-    public constructor(props: { authenticated: boolean, config?: AxiosRequestConfig }) {
+    constructor(props: IHttpClientProps) {
+        let authService: AuthService = new AuthService();
 
         if (props.config) {
-            console.log("httpclient config");
-
             this._axios = axios.create(props.config);    
         } else {
-            if (props.authenticated) {
-                console.log("httpclient 1");
+            if (props.api) {
                 this._axios = axios.create({
                     baseURL: 'http://localhost:8080',
                     timeout: 1000,
-                    // headers: {'X-Custom-Header': 'foobar'}
+                    // headers: {'Authorization': `Bearer ${authService.getAuthState().access_token}`}
                 });    
+
+                console.log("header 1", authService.getAuthState().access_token);
+
+                if (((props.authenticated)) || (props.authenticated == undefined) || (props.authenticated == null))
+                        this._axios.defaults.headers.common['Authorization'] = `Bearer ${authService.getAuthState().access_token}`;
             } else {
-                console.log("httpclient 2");
                 this._axios = axios.create({
-                    baseURL: 'https://some-domain.com/api/',
                     timeout: 1000,
-                    // headers: {'X-Custom-Header': 'foobar'}
                 });    
             }    
         }
-
         // Exemplos para alterar o axios
         // axios.defaults.headers.common['Authorization'] = `Bearer ${current_user}`;
         // delete axios.defaults.headers.common['Authorization']
-
     }
 
     public get instance() {

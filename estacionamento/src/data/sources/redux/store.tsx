@@ -1,8 +1,9 @@
 // in store.ts
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
-import AuthReducer from './auth.reducer'
-import UiReducer from './ui.reducer'
+import AuthReducer from './auth/auth.reducer'
+import UiReducer from './ui/ui.reducer'
+// import { composeWithDevTools } from "redux-devtools-extension";
 
 const initialState = {};
 
@@ -16,12 +17,16 @@ declare global {
 }
 
 const reducer = combineReducers({
-    user: AuthReducer,//user key ma store gareko
+    auth: AuthReducer,//user key ma store gareko
     UI: UiReducer
 });
 
+export type RootState = ReturnType<typeof reducer>
+
+
 const store = createStore(
     reducer, initialState, 
+    // composeWithDevTools(applyMiddleware(...middleware)),
     compose(
         applyMiddleware(...middleware)
         // ,

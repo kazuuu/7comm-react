@@ -1,4 +1,4 @@
-import { HttpClient } from "../../core/config/http/http_client";
+import HttpClient from "../../core/config/http/http_client";
 import { AxiosResponse } from 'axios';
 import { SsoDTO } from "../../domain/models/dtos/sso.dto";
 
@@ -8,16 +8,18 @@ export const authRepository = {
 };
 
 async function signIn(username: string, password: string): Promise<SsoDTO> {
-    let _axios = new HttpClient({authenticated: true}).instance;
+    let _axios = new HttpClient({api: true, authenticated: false}).instance;
 
     let body = {
         "username": username,
-        password: password,
+        "password": password,
     }
 
     return _axios.post('/login', body)
     // .then(handleResponse)
-    .then(res => {
+    .then((res: { data: Partial<SsoDTO>; }) => {
+
+        console.log(res);
         let ssoDTO: SsoDTO = SsoDTO.fromObject(res.data);
 
         return ssoDTO;
