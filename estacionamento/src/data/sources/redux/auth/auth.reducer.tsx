@@ -17,11 +17,11 @@ const initialState: IAuthState = {
     access_token: "",
     currentUser: {
         username: "",
-        email: ""
+        email: "",
     },
 }
 
-export default function (state = initialState, action:any) {
+export default function (state = initialState, action: any) {
     switch (action.type) {
         case AuthType.SET_ACCESS_TOKEN:
             return {

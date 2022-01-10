@@ -15,6 +15,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { connect } from 'react-redux';
 import { signIn } from '../../../data/sources/redux/auth/auth.action';
 import AuthService from '../../../domain/services/auth.service';
+import UiService from '../../../domain/services/ui.service';
+import store from '../../../data/sources/redux/store';
 
 function Login(props: any) {
     const navigate = useNavigate();
@@ -31,18 +33,28 @@ function Login(props: any) {
 
     const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        if (props.UI.errors) {
-            setErrors(props.UI.errors);
-        }
+    let uiService = new UiService();
 
-        setLoading(props.UI.loading);
-    }, [props.UI])
+    // useEffect(() => {
+    //     if (uiService.getState.errors) {
+    //         setErrors(uiService.getState.errors);
+    //     }
+
+    //     setLoading(uiService.getState.loading);
+    // }, [uiService.getState])
+
+    // useEffect(() => {
+    //     if (props.UI.errors) {
+    //         setErrors(props.UI.errors);
+    //     }
+
+    //     setLoading(props.UI.loading);
+    // }, [props.UI])
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
 
-        setLoading(true);
+        // setLoading(true);
 
         //your client side validation here
         //after success validation
@@ -51,11 +63,11 @@ function Login(props: any) {
             password: values.password,
         };
 
-        // let authService: AuthService = new AuthService();
+        let authService: AuthService = new AuthService();
 
-        // authService.signIn(values.email, values.password, navigate);
+        authService.signIn(values.email, values.password, navigate);
 
-        props.signIn(values.email, values.password, navigate);
+        // props.signIn(values.email, values.password, navigate);
     }
 
     const handleChange = (e: any) => {
@@ -65,6 +77,8 @@ function Login(props: any) {
             [e.target.name]: e.target.value
         }));
     };
+
+    console.log("state", store.getState());
 
     return (
         <Box>
@@ -151,13 +165,12 @@ function Login(props: any) {
 
 //this map the states to our props in this functional component
 const mapStateToProps = (state: any) => ({
- isAuthenticated: state.auth.isAuthenticated,
- UI: state.UI
+    isAuthenticated: state.auth.isAuthenticated,
+    UI: state.UI
 });
 
 //this map actions to our props in this functional component
 const mapActionsToProps = {
-    signIn
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(Login);

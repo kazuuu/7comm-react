@@ -1,6 +1,9 @@
 import { Component } from "react";
 
 export class LocalStorageSource {
+    static readonly removeItem = (key: string): any => {
+        return localStorage.removeItem(key);
+    }
 
     static readonly setObject = (key: string, value: object): void => {
         if (value) {

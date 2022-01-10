@@ -10,7 +10,6 @@ import PrivateOutlet from "./private_outlet";
 
 const AppRouter: React.FC<any>   = () => (
     <BrowserRouter>
-        <MenuComponent />
         <Routes>
             <Route path="/" element={<PublicOutlet />}>
                 <Route path="" element={<HomePage />} />

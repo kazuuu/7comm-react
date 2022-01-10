@@ -24,7 +24,7 @@ export const signIn =  (username: string, password: string, navigate: NavigateFu
         type: AuthType.SET_ACCESS_TOKEN,
         payload: ssoDTO.token,
     });
-    
+
     dispatch({
         type: AuthType.SET_CURRENT_USER,
         payload: ssoDTO.me,
@@ -56,8 +56,8 @@ export const signIn =  (username: string, password: string, navigate: NavigateFu
 // }
 
 export const signOut = () => (dispatch: any) => {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('current_user');
+    LocalStorageSource.removeItem('access_token');
+    LocalStorageSource.removeItem('current_user');
 
     dispatch({
         type: AuthType.LOGOUT

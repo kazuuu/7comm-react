@@ -1,14 +1,17 @@
 import React from 'react'
 import { Route, Navigate, RouteProps, Outlet } from 'react-router-dom'
 import { connect } from 'react-redux'
+import MenuComponent from "../../../presentation/components/menu.component";
 
 interface MyRouteProps extends RouteProps{
     isAuthenticated:boolean;
 }
 
 const PublicOutlet = (props: MyRouteProps) => {
-    console.log("PublicOutlet", props.isAuthenticated)
-    return <Outlet />;
+    return <>
+            <MenuComponent />
+            <Outlet />
+    </>;
 }
   
 const mapStateToProps = (state:any) => ({

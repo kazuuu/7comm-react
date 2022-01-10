@@ -1,17 +1,21 @@
 import React, { FC } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import store from '../../data/sources/redux/store';
 import { connect } from "react-redux";
 import { signOut } from "../../data/sources/redux/auth/auth.action";
+import AuthService from "../../domain/services/auth.service";
 
 const MenuComponent:FC<any> = (props: any) => {
+    const navigate = useNavigate();
+    let authService = new AuthService();
+    
     const signOut = async (e: any) => {
-        console.log("logout");
+        // console.log("logout");
 
-        e.preventDefault();
+        // e.preventDefault();
         
-        props.signOut();
-        
+        // props.signOut();
+        authService.signOut(navigate);
     }
 
     return (
@@ -27,17 +31,17 @@ const MenuComponent:FC<any> = (props: any) => {
     );
 }
 
-//this map the states to our props in this functional component
-const mapStateToProps = (state: any) => ({
-    isAuthenticated: state.auth.isAuthenticated,
-    UI: state.UI
-});
+// //this map the states to our props in this functional component
+// const mapStateToProps = (state: any) => ({
+//     isAuthenticated: state.auth.isAuthenticated,
+//     UI: state.UI
+// });
 
-//this map actions to our props in this functional component
-const mapActionsToProps = {
-    signOut
-};
+// //this map actions to our props in this functional component
+// const mapActionsToProps = {
+//     signOut
+// };
    
-export default connect(mapStateToProps, mapActionsToProps)(MenuComponent);
+// export default connect(mapStateToProps, mapActionsToProps)(MenuComponent);
 
-// export default MenuComponent;
+export default MenuComponent;
