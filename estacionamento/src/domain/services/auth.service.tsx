@@ -1,5 +1,4 @@
 import jwtDecode from "jwt-decode";
-import { signOut } from "../../data/sources/redux/auth/auth.action";
 import { AuthType } from "../../data/sources/redux/auth/auth.type";
 import store from "../../data/sources/redux/store";
 import { SsoDTO } from "../models/dtos/sso.dto";
@@ -19,7 +18,7 @@ export default class AuthService {
             const decodedToken:any = jwtDecode(access_token);
             console.log(decodedToken.iss);
             if (decodedToken.exp * 1000 < Date.now()) {
-                store.dispatch(signOut());
+                this.signOut();
             } else {
                 store.dispatch({ 
                     type: AuthType.SET_CURRENT_USER,
@@ -65,14 +64,12 @@ export default class AuthService {
     }
 
 
-    async signOut(navigate: NavigateFunction) {
+    async signOut() {
         LocalStorageSource.removeItem('access_token');
         LocalStorageSource.removeItem('current_user');
 
         store.dispatch({
             type: AuthType.LOGOUT
         });
-        
-        navigate('/login');
     };
 }

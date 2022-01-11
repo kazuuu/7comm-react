@@ -12,13 +12,12 @@ import Button from '@material-ui/core/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
 //redux stuff
-import { connect } from 'react-redux';
-import { signIn } from '../../../data/sources/redux/auth/auth.action';
+import { connect, useSelector } from 'react-redux';
 import AuthService from '../../../domain/services/auth.service';
 import UiService from '../../../domain/services/ui.service';
-import store from '../../../data/sources/redux/store';
+import store, { RootState } from '../../../data/sources/redux/store';
 
-function Login(props: any) {
+export default function Login(props: any) {
     const navigate = useNavigate();
     const [values, setValues] = useState({
         email: '',
@@ -35,21 +34,15 @@ function Login(props: any) {
 
     let uiService = new UiService();
 
-    // useEffect(() => {
-    //     if (uiService.getState.errors) {
-    //         setErrors(uiService.getState.errors);
-    //     }
+    const uiState = useSelector((state: RootState) => state.UI)
 
-    //     setLoading(uiService.getState.loading);
-    // }, [uiService.getState])
+    useEffect(() => {
+        if (uiService.getState.errors) {
+            setErrors(uiService.getState.errors);
+        }
 
-    // useEffect(() => {
-    //     if (props.UI.errors) {
-    //         setErrors(props.UI.errors);
-    //     }
-
-    //     setLoading(props.UI.loading);
-    // }, [props.UI])
+        setLoading(uiService.getState.loading);
+    }, [uiState])
 
     const handleSubmit = async (e: any) => {
         e.preventDefault();
@@ -163,14 +156,14 @@ function Login(props: any) {
     )
 }
 
-//this map the states to our props in this functional component
-const mapStateToProps = (state: any) => ({
-    isAuthenticated: state.auth.isAuthenticated,
-    UI: state.UI
-});
+// //this map the states to our props in this functional component
+// const mapStateToProps = (state: any) => ({
+//     isAuthenticated: state.auth.isAuthenticated,
+//     UI: state.UI
+// });
 
-//this map actions to our props in this functional component
-const mapActionsToProps = {
-};
+// //this map actions to our props in this functional component
+// const mapActionsToProps = {
+// };
 
-export default connect(mapStateToProps, mapActionsToProps)(Login);
+// export default connect(mapStateToProps, mapActionsToProps)(Login);

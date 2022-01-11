@@ -2,7 +2,6 @@ import React, { FC } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import store from '../../data/sources/redux/store';
 import { connect } from "react-redux";
-import { signOut } from "../../data/sources/redux/auth/auth.action";
 import AuthService from "../../domain/services/auth.service";
 
 const MenuComponent:FC<any> = (props: any) => {
@@ -15,7 +14,9 @@ const MenuComponent:FC<any> = (props: any) => {
         // e.preventDefault();
         
         // props.signOut();
-        authService.signOut(navigate);
+        authService.signOut();
+                
+        navigate('/login');
     }
 
     return (
