@@ -4,7 +4,7 @@ import store from '../../data/sources/redux/store';
 import { connect } from "react-redux";
 import AuthService from "../../domain/services/auth.service";
 
-const MenuComponent:FC<any> = (props: any) => {
+const MenuComponent: React.FC<any> = (props: any) => {
     const navigate = useNavigate();
     let authService = new AuthService();
     
