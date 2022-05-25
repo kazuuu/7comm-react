@@ -1,1 +1,1 @@
-# 7comm-react
+# React Sample
